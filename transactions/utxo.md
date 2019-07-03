@@ -6,7 +6,7 @@ Bitcoin full nodes track all available and spendable outputs, known as Unspent T
 
 All UTXOs together are known collectively as the UTXO set.
 
-When a wallet "receives" bitcoin, it has actually detected that a UTXO that can be spent by one of the wallet's keys has been added to the UTXO set. The bitcoin "balance" of the wallet is the total of all UTXOs that can be spent by that wallet - these UTXOs may be spread across many transactions in many blocks.
+When a wallet "receives" bitcoin, it has actually detected a UTXO that can be spent by one of the wallet's keys has been added to the UTXO set. The bitcoin "balance" of the wallet is the total of all UTXOs that can be spent by that wallet - these UTXOs may be spread across many transactions in many blocks.
 
 Bitcoin Balance?
 ----------------
@@ -26,9 +26,15 @@ Change Addresses & Mining Fee
 -----------------------------
 If a UTXO is larger than the required value of a transaction, it must still be spent entirely. Usually this involves wallets creating a change address, and adding the change address as an output from the new transaction.
 
-Note that the difference between input and output value constitutes the fee paid to the miner. This fee should be large enough to provide a financial incentive for miners to include the transaction in a block.
+Note that the difference between input and output value for a given transaction constitutes the fee paid to the miner. This fee should be large enough to provide a financial incentive for miners to include the transaction in a block.
 
 By manipulating the value sent to the change address, wallets can adjust the transaction fee offered to miners for the transaction. If the fee is higher, it is likely that the transaction will be built into the blockchain more quickly.
+
+**Be careful**: if you do not specify a change address, the entire difference between transaction input and output is available as a mining fee.
+
+Fortunately, most (all?) major bitcoin wallets automatically generate change addresses and allow the transaction fees to be set appropriately.
+
+**Heuristic for paper wallets/manually created transactions:** Do not attempt to partially spend from a UTXO. Transfer all value - to multiple addresses if necessary - and set an appropriate miner's fee.
 
 Spending Conditions for UTXOs
 -----------------------------
@@ -40,7 +46,7 @@ Locking and unlocking scripts are built in the "script" language.
 
 Sample Transaction
 ------------------
-Get data regaring an address which the wallet manages and which has control over funds:
+Get data regarding an address which the wallet manages and which has control over funds:
 
 ```bash
 bitcoin-cli -regtest listunspent 0 9999999 "[\"2NEVJfcNaCSGEYGu78sEy1iP5cbwAwwH7yu\"]"
@@ -138,4 +144,18 @@ Output:
 }
 
 ```
+How Do Nodes Track Unspent Outputs?
+-----------------------------------
 
+
+
+>Every full Bitcoin node maintains a database of which unspent outputs are left.
+>
+>When verifying a transaction, all its inputs are fetched from the database. If one is missing, validation fails. Among the data retrieved is the value of those unspent outputs, and their script (od address), which define the conditions under which the output can be spent. This information is necessary to validate whether the spending transaction has the correct signatures and does not create more bitcoin than it consumes.
+>
+>If all validation of all transactions in a block succeed, the consumed inputs are removed from the database, and all outputs of those transactions added as fresh unspent outputs in the database, allowing them to be spent by future blocks.
+>
+>As this database only contains outputs (so no signatures, for example), and even only the unspent ones, it is much smaller than the entire blockchain (some 450 MB as of juli 2014). So, no, we don't go scan through the entire blockchain to know whether outputs are not double-spent - we keep a separate database with just the data we need from it for validation.
+> [Pieter Wuille][1], SO 2 July 2014
+
+[1]: https://bitcoin.stackexchange.com/a/28260/56514
