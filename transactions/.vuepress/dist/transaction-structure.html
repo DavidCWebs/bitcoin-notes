@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>VuePress</title>
+    <meta name="description" content="">
+    
+    
+    <link rel="preload" href="/assets/css/4.styles.6431b4d5.css" as="style"><link rel="preload" href="/assets/js/app.cda14d05.js" as="script"><link rel="preload" href="/assets/js/1.81a3a15a.js" as="script"><link rel="prefetch" href="/assets/js/0.3bae38c9.js"><link rel="prefetch" href="/assets/js/2.d64b6187.js"><link rel="prefetch" href="/assets/js/3.028e8677.js">
+    <link rel="stylesheet" href="/assets/css/4.styles.6431b4d5.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div><a href="/" class="home-link router-link-active"></a><div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""><!----></div><!----></div></header><div class="sidebar-mask"></div><div class="sidebar"><!----><!----></div><div class="page"><div class="content"><h1 id="bitcoin-transaction-structure"><a href="#bitcoin-transaction-structure" aria-hidden="true" class="header-anchor">#</a> Bitcoin Transaction Structure</h1><h2 id="unlocking-script"><a href="#unlocking-script" aria-hidden="true" class="header-anchor">#</a> Unlocking Script</h2><p>Used to validate a transaction - demonstrates that a UTXO can be spent, because the relevant private key has been used to sign the unlocking script.</p><p>A UTXO contains a locking script.</p><p>A transaction input (UTXO) <code>vin</code> contains a reference to the transaction that created the UTXO. This transaction contains a locking script.</p><p>The transaction is validated by using an unlocking script <code>scriptSig</code> to unlock the locking script from the original transaction (the one that generated the UTXO).</p><p><strong>For a transaction to be considered valid, the unlocking script must satisfy the condition set in the locking script.</strong></p><h2 id="example-transaction"><a href="#example-transaction" aria-hidden="true" class="header-anchor">#</a> Example Transaction</h2><p>To view a complete transaction in regtest:</p><pre class="language-text"><code>RAW=$(bitcoin-cli -regtest getrawtransaction 6d2808d5544748c63de8a32ca96741a5ad11922f3adf827fc3568a785e64c3ea)
+
+bitcoin-cli -regtest decoderawtransaction $RAW | jq
+
+</code></pre><p>Output:</p><pre class="language-text"><code>{
+  &quot;txid&quot;: &quot;6d2808d5544748c63de8a32ca96741a5ad11922f3adf827fc3568a785e64c3ea&quot;,
+  &quot;hash&quot;: &quot;6d2808d5544748c63de8a32ca96741a5ad11922f3adf827fc3568a785e64c3ea&quot;,
+  &quot;version&quot;: 2,
+  &quot;size&quot;: 300,
+  &quot;vsize&quot;: 300,
+  &quot;weight&quot;: 1200,
+  &quot;locktime&quot;: 105,
+  &quot;vin&quot;: [
+    {
+      &quot;txid&quot;: &quot;ffaca45dfe44106c86b3c5b9c77ea1c09a9795d54d1975c24bd9da6b3cf572b9&quot;,
+      &quot;vout&quot;: 0,
+      &quot;scriptSig&quot;: {
+        &quot;asm&quot;: &quot;304402207b1b5a8d377ddbdd652f141065b26bef13d6cdd258e8e62f4289e4457ed7044902201fc4b66a296d2ebbfba876098c3e6ab6d49e013664da68cb87646971f1263463[ALL]&quot;,
+        &quot;hex&quot;: &quot;47304402207b1b5a8d377ddbdd652f141065b26bef13d6cdd258e8e62f4289e4457ed7044902201fc4b66a296d2ebbfba876098c3e6ab6d49e013664da68cb87646971f126346301&quot;
+      },
+      &quot;sequence&quot;: 4294967294
+    },
+    {
+      &quot;txid&quot;: &quot;d78c5a5943de9ab7a12f61ff29ff9acdf426fb9e6f098a2e34ecdfb6b788263a&quot;,
+      &quot;vout&quot;: 0,
+      &quot;scriptSig&quot;: {
+        &quot;asm&quot;: &quot;304402206ccdf9aaff463f33578308b7dcf5857f48d002a1319f69c256b32321c3cc4dad0220137f65047eb4c3eb4aa2fcab8ea4e2a0496b54901edb60b56aa426bdfc301064[ALL]&quot;,
+        &quot;hex&quot;: &quot;47304402206ccdf9aaff463f33578308b7dcf5857f48d002a1319f69c256b32321c3cc4dad0220137f65047eb4c3eb4aa2fcab8ea4e2a0496b54901edb60b56aa426bdfc30106401&quot;
+      },
+      &quot;sequence&quot;: 4294967294
+    }
+  ],
+  &quot;vout&quot;: [
+    {
+      &quot;value&quot;: 0.09994,
+      &quot;n&quot;: 0,
+      &quot;scriptPubKey&quot;: {
+        &quot;asm&quot;: &quot;OP_HASH160 179a747f5caa93d99a6065b08658f62b9b92574f OP_EQUAL&quot;,
+        &quot;hex&quot;: &quot;a914179a747f5caa93d99a6065b08658f62b9b92574f87&quot;,
+        &quot;reqSigs&quot;: 1,
+        &quot;type&quot;: &quot;scripthash&quot;,
+        &quot;addresses&quot;: [
+          &quot;2MuQ2ZRT1wLsZKevD9biPDzb5WosXyyDQER&quot;
+        ]
+      }
+    },
+    {
+      &quot;value&quot;: 99.9,
+      &quot;n&quot;: 1,
+      &quot;scriptPubKey&quot;: {
+        &quot;asm&quot;: &quot;OP_HASH160 e9045eb5c979a83dc61efaf7d1003b1d58dbcc66 OP_EQUAL&quot;,
+        &quot;hex&quot;: &quot;a914e9045eb5c979a83dc61efaf7d1003b1d58dbcc6687&quot;,
+        &quot;reqSigs&quot;: 1,
+        &quot;type&quot;: &quot;scripthash&quot;,
+        &quot;addresses&quot;: [
+          &quot;2NEVJfcNaCSGEYGu78sEy1iP5cbwAwwH7yu&quot;
+        ]
+      }
+    }
+  ]
+}
+</code></pre></div><!----><!----></div></div></div>
+    <script src="/assets/js/1.81a3a15a.js" defer></script><script src="/assets/js/app.cda14d05.js" defer></script>
+  </body>
+</html>

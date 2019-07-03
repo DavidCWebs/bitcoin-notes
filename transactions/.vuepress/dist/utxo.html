@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>VuePress</title>
+    <meta name="description" content="">
+    
+    
+    <link rel="preload" href="/assets/css/4.styles.6431b4d5.css" as="style"><link rel="preload" href="/assets/js/app.cda14d05.js" as="script"><link rel="preload" href="/assets/js/0.3bae38c9.js" as="script"><link rel="prefetch" href="/assets/js/1.81a3a15a.js"><link rel="prefetch" href="/assets/js/2.d64b6187.js"><link rel="prefetch" href="/assets/js/3.028e8677.js">
+    <link rel="stylesheet" href="/assets/css/4.styles.6431b4d5.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div><a href="/" class="home-link router-link-active"></a><div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""><!----></div><!----></div></header><div class="sidebar-mask"></div><div class="sidebar"><!----><!----></div><div class="page"><div class="content"><h1 id="unspent-transaction-outputs"><a href="#unspent-transaction-outputs" aria-hidden="true" class="header-anchor">#</a> Unspent Transaction Outputs</h1><p>Transaction outputs are indivisible chunks of bitcoin that are recorded on the blockchain and recognised as valid by the entire network.</p><p>Bitcoin full nodes track all available and spendable outputs, known as Unspent Transaction Outputs or UTXOs.</p><p>All UTXOs together are known collectively as the UTXO set.</p><p>When a wallet &quot;receives&quot; bitcoin, it has actually detected a UTXO that can be spent by one of the wallet's keys has been added to the UTXO set. The bitcoin &quot;balance&quot; of the wallet is the total of all UTXOs that can be spent by that wallet - these UTXOs may be spread across many transactions in many blocks.</p><h2 id="bitcoin-balance"><a href="#bitcoin-balance" aria-hidden="true" class="header-anchor">#</a> Bitcoin Balance?</h2><p>The bitcoin protocol has no concept of balance. Wallets aggregate the value of any UTXO that the wallet controls and present this as the balance.</p><p>To determine the amount of available bitcoin controlled by a wallet, the wallet needs to scan the blockchain to determine UTXO associated with keys controlled by the wallet. Most wallets maintain a collection of UTXOs that can be spent with the wallet's keys.</p><h2 id="indivisibility"><a href="#indivisibility" aria-hidden="true" class="header-anchor">#</a> Indivisibility</h2><p>UTXOs cannot be split - they must be spent in their entirety. UTXOs are discrete and indivisible units of value, denominated in <strong>integer</strong> satoshis (10e-8 BTC).</p><h2 id="transactions"><a href="#transactions" aria-hidden="true" class="header-anchor">#</a> Transactions</h2><p>Transactions involve creating new UTXOs that can be in turn spent by different keys. They take previous UTXOs as inputs, and create new UTXOs as outputs.</p><h2 id="change-addresses-mining-fee"><a href="#change-addresses-mining-fee" aria-hidden="true" class="header-anchor">#</a> Change Addresses &amp; Mining Fee</h2><p>If a UTXO is larger than the required value of a transaction, it must still be spent entirely. Usually this involves wallets creating a change address, and adding the change address as an output from the new transaction.</p><p>Note that the difference between input and output value for a given transaction constitutes the fee paid to the miner. This fee should be large enough to provide a financial incentive for miners to include the transaction in a block.</p><p>By manipulating the value sent to the change address, wallets can adjust the transaction fee offered to miners for the transaction. If the fee is higher, it is likely that the transaction will be built into the blockchain more quickly.</p><p><strong>Be careful</strong>: if you do not specify a change address, the entire difference between transaction input and output is available as a mining fee.</p><p>Fortunately, most (all?) major bitcoin wallets automatically generate change addresses and allow the transaction fees to be set appropriately.</p><p><strong>Heuristic for paper wallets/manually created transactions:</strong> Do not attempt to partially spend from a UTXO. Transfer all value - to multiple addresses if necessary - and set an appropriate miner's fee.</p><h2 id="spending-conditions-for-utxos"><a href="#spending-conditions-for-utxos" aria-hidden="true" class="header-anchor">#</a> Spending Conditions for UTXOs</h2><p>UTXOs contain a locking script - created such that it can be unlocked by the private key of the receiving address. To spend a UTXO, you must provide a solution to the locking script - which is basically a cryptographic puzzle that proves you possess a private key, without exposing that private key.</p><p>When you add an input to a transaction, you must provide a valid unlocking script for the UTXO input.</p><p>Locking and unlocking scripts are built in the &quot;script&quot; language.</p><h2 id="sample-transaction"><a href="#sample-transaction" aria-hidden="true" class="header-anchor">#</a> Sample Transaction</h2><p>Get data regarding an address which the wallet manages and which has control over funds:</p><pre class="language-bash"><code>bitcoin-cli -regtest listunspent 0 9999999 <span class="token string">&quot;[\&quot;2NEVJfcNaCSGEYGu78sEy1iP5cbwAwwH7yu\&quot;]&quot;</span>
+<span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token string">&quot;txid&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;6d2808d5544748c63de8a32ca96741a5ad11922f3adf827fc3568a785e64c3ea&quot;</span>,
+    <span class="token string">&quot;vout&quot;</span><span class="token keyword">:</span> 1,
+    <span class="token string">&quot;address&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;2NEVJfcNaCSGEYGu78sEy1iP5cbwAwwH7yu&quot;</span>,
+    <span class="token string">&quot;label&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;&quot;</span>,
+    <span class="token string">&quot;redeemScript&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;00145e3ce6f54cf312d8e6456fc2f69b566f13553d30&quot;</span>,
+    <span class="token string">&quot;scriptPubKey&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;a914e9045eb5c979a83dc61efaf7d1003b1d58dbcc6687&quot;</span>,
+    <span class="token string">&quot;amount&quot;</span><span class="token keyword">:</span> 99.90000000,
+    <span class="token string">&quot;confirmations&quot;</span><span class="token keyword">:</span> 1,
+    <span class="token string">&quot;spendable&quot;</span><span class="token keyword">:</span> true,
+    <span class="token string">&quot;solvable&quot;</span><span class="token keyword">:</span> true,
+    <span class="token string">&quot;desc&quot;</span><span class="token keyword">:</span> <span class="token string">&quot;sh(wpkh([90ba3d87/0'/0'/26']03fc58cb2061f37c45221382a4d1cc20395e682d666dabe8335a47ab0b027fbea1))#79kzpz6m&quot;</span>,
+    <span class="token string">&quot;safe&quot;</span><span class="token keyword">:</span> <span class="token boolean">true</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+
+</code></pre><p>This tells us that the address <code>2NEVJfcNaCSGEYGu78sEy1iP5cbwAwwH7yu</code> has access to 99.9 bitcoins, and that the UTXO originated in the 2nd output (<code>vout</code>) of transaction with id (<code>txid</code>) <code>6d2808d5544748c63de8a32ca96741a5ad11922f3adf827fc3568a785e64c3ea</code>.</p><p>To get the transaction data:</p><pre class="language-bash"><code><span class="token comment"># start bitcoind in regtest mode:</span>
+bitcoind -regtest
+
+<span class="token comment"># In another terminal, get the raw transaction:</span>
+bitcoin-cli -regtest getrawtransaction 6d2808d5544748c63de8a32ca96741a5ad11922f3adf827fc3568a785e64c3ea
+
+<span class="token comment"># Decode to view full transaction data - $RAW is output of above:</span>
+bitcoin-cli -regtest decoderawtransaction <span class="token variable">$RAW</span>
+</code></pre><p>Output:</p><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;txid&quot;</span><span class="token operator">:</span> <span class="token string">&quot;6d2808d5544748c63de8a32ca96741a5ad11922f3adf827fc3568a785e64c3ea&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;hash&quot;</span><span class="token operator">:</span> <span class="token string">&quot;6d2808d5544748c63de8a32ca96741a5ad11922f3adf827fc3568a785e64c3ea&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;version&quot;</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;size&quot;</span><span class="token operator">:</span> <span class="token number">300</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;vsize&quot;</span><span class="token operator">:</span> <span class="token number">300</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;weight&quot;</span><span class="token operator">:</span> <span class="token number">1200</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;locktime&quot;</span><span class="token operator">:</span> <span class="token number">105</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;vin&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;txid&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ffaca45dfe44106c86b3c5b9c77ea1c09a9795d54d1975c24bd9da6b3cf572b9&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;vout&quot;</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;scriptSig&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;asm&quot;</span><span class="token operator">:</span> <span class="token string">&quot;304402207b1b5a8d377ddbdd652f141065b26bef13d6cdd258e8e62f4289e4457ed7044902201fc4b66a296d2ebbfba876098c3e6ab6d49e013664da68cb87646971f1263463[ALL]&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;hex&quot;</span><span class="token operator">:</span> <span class="token string">&quot;47304402207b1b5a8d377ddbdd652f141065b26bef13d6cdd258e8e62f4289e4457ed7044902201fc4b66a296d2ebbfba876098c3e6ab6d49e013664da68cb87646971f126346301&quot;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;sequence&quot;</span><span class="token operator">:</span> <span class="token number">4294967294</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;txid&quot;</span><span class="token operator">:</span> <span class="token string">&quot;d78c5a5943de9ab7a12f61ff29ff9acdf426fb9e6f098a2e34ecdfb6b788263a&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;vout&quot;</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;scriptSig&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;asm&quot;</span><span class="token operator">:</span> <span class="token string">&quot;304402206ccdf9aaff463f33578308b7dcf5857f48d002a1319f69c256b32321c3cc4dad0220137f65047eb4c3eb4aa2fcab8ea4e2a0496b54901edb60b56aa426bdfc301064[ALL]&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;hex&quot;</span><span class="token operator">:</span> <span class="token string">&quot;47304402206ccdf9aaff463f33578308b7dcf5857f48d002a1319f69c256b32321c3cc4dad0220137f65047eb4c3eb4aa2fcab8ea4e2a0496b54901edb60b56aa426bdfc30106401&quot;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;sequence&quot;</span><span class="token operator">:</span> <span class="token number">4294967294</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;vout&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;value&quot;</span><span class="token operator">:</span> <span class="token number">0.09994</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;n&quot;</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;scriptPubKey&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;asm&quot;</span><span class="token operator">:</span> <span class="token string">&quot;OP_HASH160 179a747f5caa93d99a6065b08658f62b9b92574f OP_EQUAL&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;hex&quot;</span><span class="token operator">:</span> <span class="token string">&quot;a914179a747f5caa93d99a6065b08658f62b9b92574f87&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;reqSigs&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;scripthash&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;addresses&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token string">&quot;2MuQ2ZRT1wLsZKevD9biPDzb5WosXyyDQER&quot;</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;value&quot;</span><span class="token operator">:</span> <span class="token number">99.9</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;n&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;scriptPubKey&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;asm&quot;</span><span class="token operator">:</span> <span class="token string">&quot;OP_HASH160 e9045eb5c979a83dc61efaf7d1003b1d58dbcc66 OP_EQUAL&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;hex&quot;</span><span class="token operator">:</span> <span class="token string">&quot;a914e9045eb5c979a83dc61efaf7d1003b1d58dbcc6687&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;reqSigs&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;scripthash&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;addresses&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token string">&quot;2NEVJfcNaCSGEYGu78sEy1iP5cbwAwwH7yu&quot;</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+
+</code></pre><h2 id="how-do-nodes-track-unspent-outputs"><a href="#how-do-nodes-track-unspent-outputs" aria-hidden="true" class="header-anchor">#</a> How Do Nodes Track Unspent Outputs?</h2><blockquote><p>Every full Bitcoin node maintains a database of which unspent outputs are left.</p><p>When verifying a transaction, all its inputs are fetched from the database. If one is missing, validation fails. Among the data retrieved is the value of those unspent outputs, and their script (od address), which define the conditions under which the output can be spent. This information is necessary to validate whether the spending transaction has the correct signatures and does not create more bitcoin than it consumes.</p><p>If all validation of all transactions in a block succeed, the consumed inputs are removed from the database, and all outputs of those transactions added as fresh unspent outputs in the database, allowing them to be spent by future blocks.</p><p>As this database only contains outputs (so no signatures, for example), and even only the unspent ones, it is much smaller than the entire blockchain (some 450 MB as of juli 2014). So, no, we don't go scan through the entire blockchain to know whether outputs are not double-spent - we keep a separate database with just the data we need from it for validation.
+<a href="https://bitcoin.stackexchange.com/a/28260/56514" target="_blank" rel="noopener noreferrer">Pieter Wuille</a>, SO 2 July 2014</p></blockquote></div><!----><!----></div></div></div>
+    <script src="/assets/js/0.3bae38c9.js" defer></script><script src="/assets/js/app.cda14d05.js" defer></script>
+  </body>
+</html>
