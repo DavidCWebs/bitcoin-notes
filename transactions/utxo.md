@@ -2,7 +2,7 @@ Unspent Transaction Outputs
 ===========================
 Transaction outputs are indivisible chunks of bitcoin that are recorded on the blockchain and recognised as valid by the entire network.
 
-Bitcoin full nodes track all available and spendable outputs, known as Unspent Transaction Outputs or UTXOs.
+Bitcoin full nodes (e.g. Bitcoin Core) track all available and spendable outputs, known as Unspent Transaction Outputs or UTXOs.
 
 All UTXOs together are known collectively as the UTXO set.
 
@@ -146,8 +146,6 @@ Output:
 ```
 How Do Nodes Track Unspent Outputs?
 -----------------------------------
-
-
 
 >Every full Bitcoin node maintains a database of which unspent outputs are left.
 >
