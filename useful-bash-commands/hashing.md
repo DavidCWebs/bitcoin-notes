@@ -1,7 +1,7 @@
 Bash Hashing Utilities
 ======================
 
-In Bitcoin Core, the last 32 bytes of `*.dat` files consist of a checksum - a double sha256 hash of the file.
+In Bitcoin Core, the last 32 bytes of `peers.dat` files consist of a checksum - a double sha256 hash of the file.
 
 Note that the checksum is not included in the hash - the file is double hashed, and the resulting 32 bytes are appended to the file.
 
