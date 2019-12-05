@@ -3,6 +3,16 @@ Running `bitcoind` allows Bitcoin Core to function as a HTTP JSON-RPC server. Th
 
 JSON-RPC is a lightweight remote procedure call protocol. It allows a client to send a request in JSON format to a server. The server executes the required function and sends a serialized JSON object back to the client as a response.
 
+Requirements
+------------
+You can either pass command-line options when starting `bitcoind` to enable the RPC interface and control other necessary settings, or you can add configuration data in a config file.
+
+The config file approach is probably the most practical, and is the method covered in this article.
+
+When started, `bitcoind` looks for a configuration file named `bitcoin.conf` in the bitcoin data directory (under Linux, this is `~/.bitcoin` by default.
+
+
+
 Security of the JSON-RPC Server
 -------------------------------
 The JSON-RPC server requires basic HTTP authentication. For example, to send a request using `curl`:
@@ -38,7 +48,9 @@ Authentication data (user name and password) is sent as base 64 encoded plaintex
 ```
 These packets were captured on the server hosting `bitcoind`, but they show how the data is transmitted over the network.
 
-Note that in the above block `YWxpY2U6cGFzc3dvcmQxMjM=` base64 decodes to alice:password123. In the case of basic HTTP authentication like this, the [connection is not secure][5] unless the exchange takes place over HTTPS(TLS).
+Note that in the above block `YWxpY2U6cGFzc3dvcmQxMjM=` base64 decodes to alice:password123. Obviously this is a security vulnerability - an eavesdropper can easily determine the user name and password.
+
+In the case of basic HTTP authentication like this, the [connection is not secure][5] unless the exchange takes place over HTTPS(TLS).
 
 The Bitcoin RPC API does not allow connection via SSL - [this functionality was dropped in 2015][3].
 
@@ -46,7 +58,7 @@ Restrict IP Address
 -------------------
 By default, `bitcoind` only allows RPC connections from localhost. You can ease this restriction by specifying an IP address in the `rpcallowip` field in the `~/.bitcoin/bitcoin.conf` configuration file.
 
-Example `bitcoin.conf` allowing RPC access from the `192.168.122` subnet:
+Example `bitcoin.conf` allowing RPC access from the `192.168.122` subnet to the `regtest` network:
 
 ```bash
 # /path/to/bitcoin.conf
@@ -92,12 +104,14 @@ References & Resources
 * [JSON-RPC specifications][1]
 * [JSON Reference][2]
 * [HTTP Authentication][5]
+* [Bitcoin Wiki: configuration][6]
 
 [1]: https://www.jsonrpc.org/specification_v1
 [2]: https://www.json.org/json-en.html
 [3]: https://github.com/bitcoin/bitcoin/blob/d6a92dd0ea42ec64f15b81843b4db62c7b186bdb/doc/release-notes.md#ssl-support-for-rpc-dropped
 [4]: https://osric.com/chris/accidental-developer/2018/07/curl-basic-auth-base64-encoded-credentials/
 [5]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication
+[6]: https://en.bitcoin.it/wiki/Running_Bitcoin
 
 https://www.ssh.com/ssh/tunneling/example
 
