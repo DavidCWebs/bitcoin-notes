@@ -17,7 +17,7 @@ Example Transaction
 -------------------
 To view a complete transaction in regtest:
 
-```
+```bash
 RAW=$(bitcoin-cli -regtest getrawtransaction 6d2808d5544748c63de8a32ca96741a5ad11922f3adf827fc3568a785e64c3ea)
 
 bitcoin-cli -regtest decoderawtransaction $RAW | jq
@@ -25,7 +25,7 @@ bitcoin-cli -regtest decoderawtransaction $RAW | jq
 ```
 Output:
 
-```
+```json
 {
   "txid": "6d2808d5544748c63de8a32ca96741a5ad11922f3adf827fc3568a785e64c3ea",
   "hash": "6d2808d5544748c63de8a32ca96741a5ad11922f3adf827fc3568a785e64c3ea",
