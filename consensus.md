@@ -1,5 +1,5 @@
-Consensus
-=========
+# Consensus
+
 Because Blockchains are _decentralized_, there needs to be a way to ensure that all blocks are the same - that all nodes reflect the same chain.
 
 This is the problem of consensus - and blockchains need to implement some form of consensus algorithm if the network contains more than one node.

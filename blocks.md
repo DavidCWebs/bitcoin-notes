@@ -1,5 +1,5 @@
-Blocks & Blockchain
-===================
+# Blocks & Blockchain
+
 
 Blockchain Structure
 --------------------

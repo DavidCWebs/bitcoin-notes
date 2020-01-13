@@ -1,5 +1,5 @@
-Bloom Filter
-============
+# Bloom Filter
+
 Used by Simplified Payment Verification (SPV) Nodes as a way of accessing transactions that are relevant to the keys held by the wallet without:
 
 * Downloading the entire blockchain.

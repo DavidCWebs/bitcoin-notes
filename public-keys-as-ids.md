@@ -1,5 +1,5 @@
-Linking Identity to Public Key
-==============================
+# Linking Identity to Public Key
+
 A signature that verifies correctly makes a statement on behalf of the public key that must have been made by someone with knowledge of the associated secret key.
 
 ## Make a New Identity

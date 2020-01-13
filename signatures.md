@@ -1,5 +1,4 @@
-Digital Signatures
-==================
+# Digital Signatures
 Cryptographic primitive.
 
 1. Only you can sign, but anyone can verify

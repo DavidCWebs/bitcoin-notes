@@ -1,5 +1,5 @@
-Bitcoin Core Architecture
-=========================
+# Bitcoin Core Architecture
+
 
 User Interfaces: P2P
 --------------------

@@ -1,5 +1,5 @@
-Cold Signing Workflow: PSBT
-===========================
+# Cold Signing Workflow: PSBT
+
 
 Generate a Cold Wallet
 ----------------------

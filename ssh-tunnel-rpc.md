@@ -48,7 +48,7 @@ Authentication data (user name and password) is sent as base 64 encoded plaintex
 ```
 These packets were captured on the server hosting `bitcoind`, but they show how the data is transmitted over the network.
 
-Note that in the above block `YWxpY2U6cGFzc3dvcmQxMjM=` base64 decodes to alice:password123. Obviously this is a security vulnerability - an eavesdropper can easily determine the user name and password.
+Note that in the above block `YWxpY2U6cGFzc3dvcmQxMjM=` represents the base64 encoded user:password combination - in this case, `alice:password123`. This is __not encrypted__ - it's simply a base64 representation of the ASCII characters. See for yourself by [decoding here][7]. Obviously this is a security vulnerability - an eavesdropper can easily determine the user name and password.
 
 In the case of basic HTTP authentication like this, the [connection is not secure][5] unless the exchange takes place over HTTPS(TLS).
 
@@ -105,6 +105,7 @@ References & Resources
 * [JSON Reference][2]
 * [HTTP Authentication][5]
 * [Bitcoin Wiki: configuration][6]
+* [SSH Tunneling][8]
 
 [1]: https://www.jsonrpc.org/specification_v1
 [2]: https://www.json.org/json-en.html
@@ -112,6 +113,8 @@ References & Resources
 [4]: https://osric.com/chris/accidental-developer/2018/07/curl-basic-auth-base64-encoded-credentials/
 [5]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication
 [6]: https://en.bitcoin.it/wiki/Running_Bitcoin
+[7]: https://www.base64decode.net/
+[8]: https://www.ssh.com/ssh/tunneling
 
 https://www.ssh.com/ssh/tunneling/example
 

@@ -1,6 +1,13 @@
-jq Notes
-========
+# jq Notes
 
+Make a Manifest File for Addresses that Have Unspent Balances
+-------------------------------------------------------------
+```bash
+bitcoin-cli -regtest listunspent | jq -r '.[] .address' > /tmp/manifest
+```
+
+List Connected Nodes
+--------------------
 ```bash
 bitcoin-cli getpeerinfo | jq '.[] | {addr: .addr, addrlocal: .addrlocal, id: .id, subver: .subver}'
 {

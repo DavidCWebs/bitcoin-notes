@@ -1,5 +1,5 @@
-Proof of Work
-=============
+# Proof of Work
+
 Proof of work involves solving a computational puzzle in order to create new blocks in a blockchain.
 
 This process is known as "mining". Nodes have an incentive to mine - the minor who successfully adds a new block to the blockchain receives a reward (e.g. 12.5 BTC and a small transaction fee).

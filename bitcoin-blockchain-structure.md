@@ -1,5 +1,5 @@
-Bitcoin Blockchain Structure
-============================
+# Bitcoin Blockchain Structure
+
 Blockchain data structure:
 Ordered, back-linked list of blocks. Blocks contain transaction data.
 
