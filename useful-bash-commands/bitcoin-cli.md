@@ -20,22 +20,23 @@ If your system has `jq` installed:
 
 ```bash
 # regtest
-bitcoin-cli -regtest listunspent | jq -r '.[] .address' > /tmp/manifest
+bitcoin-cli -regtest listunspent | jq -r '.[] .address' | sort -u > /tmp/manifest
 
-#mainnet
-bitcoin-cli listunspent | jq -r '.[] .address' > /tmp/manifest
+# mainnet
+bitcoin-cli listunspent | jq -r '.[] .address' | sort -u > /tmp/manifest
 ```
 
 If you do not have access to `jq` on your system (you may be running an air-gapped machine) you can achieve the same result with basic GNU/Linux tools:
 
 ```bash
-bitcoin-cli listunspent | grep address | awk '{print substr($2,2,length($2)-3)}' > /tmp/manifest
+bitcoin-cli listunspent | grep address | awk '{print substr($2,2,length($2)-3)}' | sort -u > /tmp/manifest
 ```
 This command:
 
-* Uses `listunspent` to fetch JSON data for public addresses having unspent outputs
-* Passes the result into `grep` which restricts the output to lines containing the word "address"
-* Uses `awk` to print a substring from the second column, which is the address
+* Uses `listunspent` to fetch JSON data for public addresses having unspent outputs.
+* Passes the result into `grep` which restricts the output to lines containing the word "address".
+* Uses `awk` to print a substring from the second column, which is the address.
+* The `sort` utility is used with the `-u` option to remove duplicates from the output.
 * Redirects stdout to a file `/tmp/manifest`
 
 The `awk` `substring()` function in this case starts at the second character of `$2` and ends at the length of the string minus 3 (to remove the terminating quotation mark, comma & newline).
