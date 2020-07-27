@@ -45,8 +45,6 @@ Once the process has finished, you will have an architecture/OS specific directo
 
 In the case of Ubuntu 20.04 on a modern PC with an x86 processor, this will likely be in a directory named `x86_64-pc-linux-gnu`.
 
-
-
 Configure
 ---------
 The `configure` command creates the necessary Makefiles.
@@ -73,7 +71,13 @@ For our purposes, `usr/local/bin` is a good choice:
 sudo ln -s ~/bitcoin/src/bitcoin{d,-cli} /usr/local/bin
 sudo ln -s ~/bitcoin/src/qt/bitcoin-qt /usr/local/bin
 ```
+Alternatively, run `sudo make install` in the project core directory after making the project.
 
+
+Full Install Instructions, Installed Dependencies
+-------------------------------------------------
+
+Complete commands to install Bitcoin Core on a new Ubuntu 20.04 installation.
 
 ```bash
 # Install dependencies
