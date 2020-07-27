@@ -121,6 +121,6 @@ sudo apt-get install libqrencode-dev
 # Make
 make
 
-# INstall
-make install 
-
+# Install - sudo is required to install binaries in /usr/local/bin
+sudo make install 
+```
