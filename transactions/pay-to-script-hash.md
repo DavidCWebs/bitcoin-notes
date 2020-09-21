@@ -6,7 +6,9 @@ All transaction outputs create a cryptographic puzzle that must be solved in ord
 * `<scriptPubKey>`: The spending conditions, containing the (usually hashed) public key.
 * `<scriptSig>`: Contains a signature that unlocks the `<scriptPubKey>`.
 
-In a Pay-To-Script-Hash (P2SH) transaction, the conditions to redeem the transaction are encoded in the `<scriptSig>` rather than in the `<scriptPubKey>`. The conditions required to spend the UTXO is shifted to the receiver of the funds (i.e. the _input_ in the spending transaction.
+In a Pay-To-Script-Hash (P2SH) transaction, the conditions to redeem the transaction are encoded in the `<scriptSig>` rather than in the `<scriptPubKey>`.
+
+In this way, the conditions required to spend the UTXO are shifted to the receiver of the funds (i.e. the _input_ in the spending transaction).
 
 Locking Steps
 -------------
@@ -30,7 +32,7 @@ The receiver creates an address by converting the hash of the redemption script 
 The `scriptPubKey` of the transaction output will be:
 
 ```
-OP_HASH160 <hash of redemption script>
+OP_HASH160 <hash of redemption script> OP_EQUAL
 ```
 
 Take values from [this reference][1] as an example:
@@ -49,7 +51,9 @@ Process of Spending
 -------------------
 The conditions specified in an output `<scriptPubKey>` must be met to spend the funds contained in that output.
 
-The spending input must provide a `<scriptSig>` that solves the cryptographic puzzle defined by the `<scriptPubKey>`.
+The locking script - `<scriptPubKey>` is a hash of the original custom locking script (the "redeem script").
+
+The spending input must provide the original redeem script along with a `<scriptSig>` that solves the cryptographic puzzle defined by the redeem script.
 
 The mechanics of this involve the protocol concatenating `<scriptSig>` and `<scriptPubKey>` and running the entire script. If the final result evaluates to true, the transaction is valid. If at any point the script evaluation fails, the transaction is considered invalid and is discarded.
 
@@ -58,5 +62,5 @@ References
 * [Worked example, P2SH Multisig Transaction][1]
 * [SO Answer][2], David Harding
 
-[1]: https://bitcoin.org/en/developer-examples#p2sh-multisig
+[1]: https://developer.bitcoin.org/examples/transactions.html#p2sh-multisig
 [2]: https://bitcoin.stackexchange.com/a/52272/56514

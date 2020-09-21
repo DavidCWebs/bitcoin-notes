@@ -39,6 +39,26 @@ The `jq` `select()` function filters for input truth. So `jq '.[] | select(.inbo
 ```bash
 bitcoin-cli getpeerinfo | jq '.[] | {addr: .addr, addrlocal: .addrlocal, id: .id, subver: .subver, inbound: .inbound} | select(.inbound | select(true))'
 ```
+Output all records for a given txid:
+
+```bash
+bitcoin-cli -regtest listunspent | jq '.[] | select(.txid == "acb1e896dd379786ab05b0ef1125d4a06f3cf5cb62f564f72b86e3ef6b0371ff")'
+
+# Outputs the record with the specified txid:
+{
+  "txid": "acb1e896dd379786ab05b0ef1125d4a06f3cf5cb62f564f72b86e3ef6b0371ff",
+  "vout": 0,
+  "address": "2N3JHAtRLTy4dG7Zt1mEfGd3mWSsYBvckQC",
+  "redeemScript": "0014b453772eccddf7ab719c6fce5ef8dc5a3ccbf8e8",
+  "scriptPubKey": "a9146e4529a080512843f3fbef5c3945376ed8e51b8087",
+  "amount": 7.9999664,
+  "confirmations": 111,
+  "spendable": true,
+  "solvable": true,
+  "desc": "sh(wpkh([90ba3d87/0'/1'/5']029f237151af6c79dad738e78bcd633469671a80640311a39f5b706a6a3048820b))#2ntw8u5u",
+  "safe": true
+}
+```
 
 
 References
