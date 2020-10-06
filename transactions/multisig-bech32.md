@@ -46,6 +46,9 @@ bitcoin-cli -regtest getaddressinfo ${address} | jq -r .pubkey
 pubkeys[0]=02c3eb5147ead06273e48b71fb2ce3e0f1484b3222c75b2039beb720c480ecb00c # first
 pubkeys[1]=02b6d8bd0cd403f488df6dccc5281c61029052a31d6ce57a0d6dcb64890a4ea814 # second
 pubkeys[2]=0234965dbaff057b7a1fd08b8e40b3117c23abaa05345ab3cedf129c0c50b17e5f # third
+
+# Or make an array using space separated strings/variables:
+pubkeys=($key0 $key1 $key2)
 ```
 
 Create a Multisig 
