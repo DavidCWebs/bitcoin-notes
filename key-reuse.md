@@ -9,7 +9,7 @@ Before spending, the public key associated with a Bitcoin address is not publicl
 
 When Bitcoin is spent, the public key associated with the Bitcoin address is revealed in the spending transaction. This exposes the public key to theoretical cryptographic attacks - such attacks would mean that the sending address would be vulnerable if it received funds in the future.
 
-Such an attack against the public key cryptography securing a novel Bitcoin address would only be feasible by a quantum computer that could break the key in the short time period between sending the transaction and it's incorporation into a block [^1]. Address reuse might make the attack more feasible - the attacker has more time to work on the exposed public key of a re-used Bitcoin address.
+Such an attack against the public key cryptography securing a novel Bitcoin address would only be feasible by a quantum computer that could break the key in the short time period between sending the transaction and it's incorporation into a block [1]. Address reuse might make the attack more feasible - the attacker has more time to work on the exposed public key of a re-used Bitcoin address.
 
 2. Privacy
 ----------
