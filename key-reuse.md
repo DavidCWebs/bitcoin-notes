@@ -13,6 +13,7 @@ Such an attack against the public key cryptography securing a novel Bitcoin addr
 
 2. Privacy
 ----------
+Using a new key each time a person receives Bitcoin helps to maintain privacy. Using unique addresses makes it harder to examine patterns of transactions which helps prevent third-parties from inferring ownership.
 
 References
 -----------
