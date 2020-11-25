@@ -64,4 +64,8 @@ bitcoin-cli -regtest createmultisig 2 $(jq -nc '$ARGS.positional' --args "${keys
 }
 ```
 
+References
+----------
+* [Bitcoin Core `createmultisig`][1]
 
+[1]: https://bitcoin-rpc.github.io/en/doc/0.17.99/rpc/util/createmultisig/
