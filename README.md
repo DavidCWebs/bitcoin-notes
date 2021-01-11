@@ -12,6 +12,9 @@ Resources
 * [Debugging Bitcoin Core][7], fjahr
 * [Reviewing PRs in Bitcoin Core][8]
 
+### Best Practices
+* [Bitcoin Optech Scaling Cookbook][9]
+
 ### Lightning
 * [Rusty Russell on Bitcoin Lightning Spec][5]
 
@@ -23,3 +26,4 @@ Resources
 [6]: https://github.com/fanquake/core-review
 [7]: https://github.com/fjahr/debugging_bitcoin
 [8]: https://jonatack.github.io/articles/how-to-review-pull-requests-in-bitcoin-core
+[9]: https://github.com/bitcoinops/scaling-book
