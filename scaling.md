@@ -7,3 +7,5 @@ The Bitcoin network primarily provides the utility of _payments_. Users use the 
 A transaction refers to a transformation on the global set of unspent transaction outputs - consuming UTXO and generating new UTXO. It also refers to the data structure that is passed through the P2P network describing the transformation and carrying witness data proving that the transaction is valid.
 
 Transactions __do not correspond to payments__. Transactions can include one, many or no payments. As such, the _transactions per second_ metric is not particularly significant. One transaction might include batched payments such that a single transaction makes payments to multiple recipients.
+
+Batching payments makes transactions fatter, whilst the blockchain weight per _payment_ decreases.
