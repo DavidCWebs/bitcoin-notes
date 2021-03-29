@@ -4,3 +4,26 @@ body {
 	background-color: black;
 	color: white;
 }
+
+body {
+	font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+	font-size: 1rem;
+	line-height: 1.5;
+	color: #f7f7f9;
+	background-color: #1d1f21;
+}
+
+#main_content_wrap {
+	background: inherit;
+	border-top: none;
+	border-bottom: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: #c9cbc9;
+	margin: 10px 0;
+	font-weight: 700;
+	color: inherit;
+	font-family: 'Lucida Grande', 'Calibri', Helvetica, Arial, sans-serif;
+	letter-spacing: -1px;
+}
