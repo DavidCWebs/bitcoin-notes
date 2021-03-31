@@ -63,7 +63,7 @@ Aliases
 -------
 Add the following to `~/.bash_aliases` or similar file that will be referenced when the shell starts:
 
-```
+```bash
 # Process output from `bitcoin-cli peerinfo`
 # ------------------------------------------
 #
