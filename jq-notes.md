@@ -59,6 +59,7 @@ bitcoin-cli -regtest listunspent | jq '.[] | select(.txid == "acb1e896dd379786ab
   "safe": true
 }
 ```
+
 Aliases
 -------
 Add the following to `~/.bash_aliases` or similar file that will be referenced when the shell starts:
