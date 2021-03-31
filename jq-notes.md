@@ -59,7 +59,31 @@ bitcoin-cli -regtest listunspent | jq '.[] | select(.txid == "acb1e896dd379786ab
   "safe": true
 }
 ```
+Aliases
+-------
+Add the following to `~/.bash_aliases` or similar file that will be referenced when the shell starts:
 
+```
+# Process output from `bitcoin-cli peerinfo`
+# ------------------------------------------
+#
+# The following commands require `jq` on the system.
+# 
+# Pretty-print selected fields from the `bitcoin-cli getpeerinfo` command.
+# The output is a valid JSON array, which can be in-turn piped into `jq` for further processing. For example:
+# - `btc-network-data | jq '. .subver'` outputs a list of client subver strings.
+# - `btc-network-data | jq '. .network'` outputs a list of network connection types.
+alias btc-network-data="bitcoin-cli getpeerinfo | jq '. | {subver: .subver, conn: .connection_type, network: .network, addr: .addr}'"
+
+# Output a list of inbound connections, with values from addr, addrlocal, network, id, subver & inbound fields.
+alias btc-inbound-all="bitcoin-cli getpeerinfo | jq '.[] | {addr: .addr, addrlocal: .addrlocal, network: .network, id: .id, subver: .subver, inbound: .inbound} | select(.inbound==true)'"
+
+# List addresses of inbound connections
+alias btc-inbound="bitcoin-cli getpeerinfo | jq '.[] | select(.inbound==true) | .addr'"
+
+# Output the number of inbound nodes connected
+alias btc-n-inbound=$'echo "$(bitcoin-cli getpeerinfo | jq \'.[] | select(.inbound==true) | .id\' | wc -l) inbound nodes connected"'
+```
 
 References
 ----------
